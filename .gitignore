@@ -1,0 +1,8 @@
+# directories to ignore
+tmp/
+*.ipynb_checkpoints/
+
+# filetypes to ignore
+*.m~
+*.swp
+*.pyc
