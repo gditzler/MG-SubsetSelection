@@ -1,5 +1,5 @@
 # Links
-* ...
+* [l1 methods](http://nbviewer.ipython.org/github/gditzler/MG-SubsetSelection/blob/master/notebooks/L1-Regs.ipynb)
 
 # Setting up the IPython server
 
