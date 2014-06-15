@@ -18,3 +18,5 @@ samples = np.array(samples)
 features = np.array(features)
 
 m = mi.calc_mi(data, labels)
+print m.sum()
+print len(m)

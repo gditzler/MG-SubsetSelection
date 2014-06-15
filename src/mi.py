@@ -15,18 +15,15 @@ def calc_mi(data, labels):
   output = []
 
   for c_data in data.transpose():
-    libMIToolbox.calculateMutualInformation.restype = c.POINTER(
-      c.c_double )
-    output = libMIToolbox.calculateMutualInformation(
+    libMIToolbox.calculateMutualInformation.restype = c.c_double 
+    result = libMIToolbox.calculateMutualInformation(
       c_data.ctypes.data_as(c.POINTER(c.c_double)),
       labels.ctypes.data_as(c.POINTER(c.c_double)),
       c_n_observations
       )
-    print dir(output)
-    for o in output.contents:
-      print o
+    output.append(result.real)
 
-  return None
+  return np.array(output)
 
 
 def check_data(data, labels):
