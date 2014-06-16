@@ -1,5 +1,6 @@
 # Links
 * [l1 methods](http://nbviewer.ipython.org/github/gditzler/MG-SubsetSelection/blob/master/notebooks/L1-Regs.ipynb)
+* [mim-test](http://nbviewer.ipython.org/github/gditzler/MG-SubsetSelection/blob/master/notebooks/MIM-Test.ipynb)
 
 # Setting up the IPython server
 
