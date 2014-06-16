@@ -9,6 +9,13 @@ except:
 
 
 def calc_mi(data, labels):
+  """
+  Calculate the Mutual Information 
+  @data
+  @labels
+
+  @mutual_information
+  """
   data, labels = check_data(data, labels)
   n_observations, n_features = data.shape
   c_n_observations = c.c_int(n_observations)
