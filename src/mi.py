@@ -23,7 +23,7 @@ def calc_mi(data, labels):
 
   @mutual_information
   """
-  data, labels = check_data(data, labels)
+  data, labels = __check_data__(data, labels)
   n_observations, n_features = data.shape
   c_n_observations = c.c_int(n_observations)
   output = []
@@ -37,6 +37,23 @@ def calc_mi(data, labels):
     output.append(result.real)
   return np.array(output)
 
+def calc_cmi(X, Y, Z):
+  """
+  Calculate Mutual Information: I(X;Y|Z) = H(X|Z) - H(X|YZ)
+  @X
+  @Y
+  @Z
+
+  @CMI
+  """
+  c_n_observations = c.c_int(len(X))
+  libMIToolbox.calculateMutualInformation.restype = c.c_double
+  result = libMIToolbox.calculateConditionalMutualInformation(
+        X.ctypes.data_as(c.POINTER(c.c_double)),
+        Y.ctypes.data_as(c.POINTER(c.c_double)),
+        Z.ctypes.data_as(c.POINTER(c.c_double)),
+        c_n_observations)
+  return result.real
 
 def mim(data, labels, n_select):
   """
@@ -49,7 +66,7 @@ def mim(data, labels, n_select):
   """
   return np.argsort(calc_mi(data, labels))[:n_select] 
 
-def check_data(data, labels):
+def __check_data__(data, labels):
   """
     Check dimensions of the data and the labels.  Raise and exception
     if there is a problem.
@@ -69,3 +86,4 @@ def check_data(data, labels):
   if len(data) != len(labels):
     raise Exception("data and labels must be the same length")
   return 1.0*data, 1.0*labels
+
