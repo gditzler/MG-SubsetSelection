@@ -2,6 +2,13 @@
 import numpy as np
 import ctypes as c
 
+__authors__ = "Gregory Ditzler" 
+__copyright__ = "Copyright 2014, EESI Laboratory (Drexel University)"
+__license__ = "GPL"
+__maintainer__ = "Gregory Ditzler"
+__email__ = "gregory.ditzler@gmail.com"
+
+
 try:
   libMIToolbox = c.CDLL("libMIToolbox.so"); 
 except:
@@ -24,14 +31,23 @@ def calc_mi(data, labels):
   for c_data in data.transpose():
     libMIToolbox.calculateMutualInformation.restype = c.c_double 
     result = libMIToolbox.calculateMutualInformation(
-      c_data.ctypes.data_as(c.POINTER(c.c_double)),
-      labels.ctypes.data_as(c.POINTER(c.c_double)),
-      c_n_observations
-      )
+        c_data.ctypes.data_as(c.POINTER(c.c_double)),
+        labels.ctypes.data_as(c.POINTER(c.c_double)),
+        c_n_observations)
     output.append(result.real)
-
   return np.array(output)
 
+
+def mim(data, labels, n_select):
+  """
+  Mutual Information Maximization (MIM)
+  @data
+  @labels
+  @n_select
+
+  @selected_indices
+  """
+  return np.argsort(calc_mi(data, labels))[:n_select] 
 
 def check_data(data, labels):
   """
