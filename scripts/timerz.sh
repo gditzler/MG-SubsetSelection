@@ -3,7 +3,7 @@
 map=../data/caporaso-gut.txt
 data=../data/caporaso-gut.biom
 tdir=../outputs/timerz
-{ time supervised_learning.py -i $data -m $map -c SEX -o qiime-dir/ -f ; } 2> $tdir/qiime.time
+{ time supervised_learning.py -i $data -m $map -c SEX -o $tdir/qiime-dir/ -f ; } 2> $tdir/qiime.time
 
 for selects in `seq 100 100 900`; do 
   echo "Running $selects"
